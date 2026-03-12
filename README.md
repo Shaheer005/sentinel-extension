@@ -194,8 +194,7 @@ Building in public. First real shipped product.
 
 ## License
 
-MIT — free to use, modify, and distribute.
-
+Copyright © 2026 Shaheer Ahmed. All Rights Reserved. The source code is available for transparency and auditing purposes only.
 ---
 
 *If this helped you, give it a ⭐ — it means a lot for a solo developer.*
