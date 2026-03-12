@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sentinel</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:340px;min-height:420px;font-family:'Google Sans',Arial,sans-serif;font-size:13px;background:#0f172a;color:#e2e8f0;overflow:hidden}
+
+/* Header */
+.header{display:flex;align-items:center;gap:10px;padding:16px;background:linear-gradient(135deg,#1e293b,#0f172a);border-bottom:1px solid #1e293b}
+.logo{font-size:22px}
+.title{flex:1}
+.title h1{font-size:15px;font-weight:700;color:#f1f5f9;letter-spacing:-0.3px}
+.title p{font-size:11px;color:#64748b;margin-top:1px}
+.status-pill{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:0.5px}
+.status-on{background:#052e16;color:#4ade80;border:1px solid #166534}
+.status-off{background:#1c1917;color:#78716c;border:1px solid #44403c}
+.status-dot{width:6px;height:6px;border-radius:50%}
+.dot-on{background:#4ade80;box-shadow:0 0 6px #4ade80}
+.dot-off{background:#78716c}
+
+/* Tabs */
+.tabs{display:flex;background:#0f172a;border-bottom:1px solid #1e293b}
+.tab{flex:1;padding:9px 4px;text-align:center;font-size:11px;font-weight:600;cursor:pointer;color:#64748b;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:0.3px}
+.tab:hover{color:#94a3b8}
+.tab.active{color:#818cf8;border-bottom-color:#818cf8}
+
+/* Panels */
+.panel{display:none;padding:16px;height:350px;overflow-y:auto}
+.panel.active{display:block}
+.panel::-webkit-scrollbar{width:4px}
+.panel::-webkit-scrollbar-track{background:#0f172a}
+.panel::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.stat-card{background:#1e293b;border-radius:10px;padding:12px;text-align:center;border:1px solid #334155}
+.stat-num{font-size:26px;font-weight:800;line-height:1}
+.stat-label{font-size:10px;color:#64748b;margin-top:4px;text-transform:uppercase;letter-spacing:0.5px}
+.stat-total .stat-num{color:#818cf8}
+.stat-phish .stat-num{color:#f87171}
+.stat-sus .stat-num{color:#fbbf24}
+.stat-safe .stat-num{color:#4ade80}
+
+.info-box{background:#1e293b;border-radius:10px;padding:12px;border:1px solid #334155;margin-bottom:10px}
+.info-box h3{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #0f172a;font-size:12px}
+.info-row:last-child{border:none}
+.info-val{color:#c7d2fe;font-weight:600}
+
+/* History */
+.history-item{background:#1e293b;border-radius:9px;padding:10px 12px;margin-bottom:8px;border:1px solid #334155;cursor:default;transition:border-color .15s}
+.history-item:hover{border-color:#475569}
+.hi-top{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.hi-subject{flex:1;font-size:12px;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hi-verdict{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;flex-shrink:0}
+.hi-phishing{background:#450a0a;color:#f87171;border:1px solid #7f1d1d}
+.hi-suspicious{background:#422006;color:#fbbf24;border:1px solid #78350f}
+.hi-safe{background:#052e16;color:#4ade80;border:1px solid #14532d}
+.hi-meta{font-size:10px;color:#64748b}
+.no-history{text-align:center;padding:40px 0;color:#475569}
+.no-history p{margin-top:6px;font-size:12px}
+
+/* Settings */
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:12px;background:#1e293b;border-radius:9px;margin-bottom:8px;border:1px solid #334155}
+.setting-label{font-size:12px;color:#e2e8f0;font-weight:500}
+.setting-sub{font-size:10px;color:#64748b;margin-top:1px}
+.toggle{width:38px;height:21px;background:#334155;border-radius:21px;cursor:pointer;position:relative;border:none;transition:background .2s;flex-shrink:0}
+.toggle.on{background:#6366f1}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:15px;height:15px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle.on::after{transform:translateX(17px)}
+
+.token-section{background:#1e293b;border-radius:9px;padding:12px;border:1px solid #334155;margin-bottom:8px}
+.token-section h3{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+.token-input{width:100%;padding:8px 10px;background:#0f172a;border:1px solid #475569;border-radius:7px;color:#e2e8f0;font-size:12px;outline:none;font-family:monospace;letter-spacing:0.5px}
+.token-input:focus{border-color:#818cf8}
+.token-input::placeholder{color:#475569;font-family:inherit;letter-spacing:normal}
+.token-status{font-size:11px;margin-top:6px;height:16px}
+.ts-valid{color:#4ade80}
+.ts-invalid{color:#f87171}
+.ts-checking{color:#94a3b8}
+
+.btn{width:100%;padding:9px;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;margin-top:6px;transition:all .15s;font-family:inherit;letter-spacing:0.3px}
+.btn-primary{background:#6366f1;color:#fff}
+.btn-primary:hover{background:#4f46e5}
+.btn-danger{background:#1c0a0a;color:#f87171;border:1px solid #7f1d1d}
+.btn-danger:hover{background:#450a0a}
+.btn-sub{background:#0f172a;color:#818cf8;border:1px solid #334155;margin-top:4px}
+.btn-sub:hover{border-color:#818cf8}
+
+/* About */
+.about-hero{text-align:center;padding:20px 0 14px}
+.about-hero .logo-big{font-size:44px}
+.about-hero h2{font-size:18px;font-weight:800;color:#f1f5f9;margin:8px 0 4px}
+.about-hero p{font-size:11px;color:#64748b}
+.feature-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.feature-item{display:flex;align-items:flex-start;gap:8px;padding:9px;background:#1e293b;border-radius:8px;border:1px solid #334155}
+.fi-icon{font-size:16px;flex-shrink:0}
+.fi-text strong{display:block;font-size:12px;color:#e2e8f0}
+.fi-text span{font-size:11px;color:#64748b}
+.version-tag{text-align:center;font-size:10px;color:#334155;margin-top:4px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">🛡</div>
+  <div class="title">
+    <h1>Sentinel</h1>
+    <p>Phishing Defender</p>
+  </div>
+  <div class="status-pill" id="statusPill">
+    <div class="status-dot dot-on" id="statusDot"></div>
+    <span id="statusText">ACTIVE</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="dashboard">📊 Stats</div>
+  <div class="tab" data-tab="history">🕐 History</div>
+  <div class="tab" data-tab="settings">⚙ Settings</div>
+  <div class="tab" data-tab="about">ℹ About</div>
+</div>
+
+<!-- Dashboard -->
+<div class="panel active" id="tab-dashboard">
+  <div class="stats-grid">
+    <div class="stat-card stat-total"><div class="stat-num" id="st-total">0</div><div class="stat-label">Scanned</div></div>
+    <div class="stat-card stat-phish"><div class="stat-num" id="st-phish">0</div><div class="stat-label">Phishing</div></div>
+    <div class="stat-card stat-sus"><div class="stat-num" id="st-sus">0</div><div class="stat-label">Suspicious</div></div>
+    <div class="stat-card stat-safe"><div class="stat-num" id="st-safe">0</div><div class="stat-label">Safe</div></div>
+  </div>
+  <div class="info-box">
+    <h3>Protection Status</h3>
+    <div class="info-row"><span>Silent Scanner</span><span class="info-val" id="scannerStatus">Active</span></div>
+    <div class="info-row"><span>AI Chat</span><span class="info-val" id="aiStatus">🔒 Locked</span></div>
+    <div class="info-row"><span>Detection Rules</span><span class="info-val">15 Active</span></div>
+    <div class="info-row"><span>Mode</span><span class="info-val">Zero-click</span></div>
+  </div>
+</div>
+
+<!-- History -->
+<div class="panel" id="tab-history">
+  <div id="historyList"></div>
+</div>
+
+<!-- Settings -->
+<div class="panel" id="tab-settings">
+  <div class="setting-row">
+    <div><div class="setting-label">Sentinel Protection</div><div class="setting-sub">Silently scan all incoming emails</div></div>
+    <button class="toggle on" id="toggleEnabled"></button>
+  </div>
+  <div class="setting-row">
+    <div><div class="setting-label">Inbox Badges</div><div class="setting-sub">Show verdict badges in email list</div></div>
+    <button class="toggle on" id="toggleBadges"></button>
+  </div>
+  <div class="token-section">
+    <h3>🤖 AI Chat (Pro)</h3>
+    <input type="text" class="token-input" id="tokenInput" placeholder="SNT-XXXX-XXXX-XXXX" maxlength="24" />
+    <div class="token-status" id="tokenStatus"></div>
+    <button class="btn btn-primary" id="saveToken">Save Token</button>
+    <button class="btn btn-sub" id="goSubscribe">Get a token — sentinel-app.com →</button>
+  </div>
+  <button class="btn btn-danger" id="clearHistory">Clear Scan History</button>
+</div>
+
+<!-- About -->
+<div class="panel" id="tab-about">
+  <div class="about-hero">
+    <div class="logo-big">🛡</div>
+    <h2>Sentinel</h2>
+    <p>Phishing Defender — Powered by AI</p>
+  </div>
+  <div class="feature-list">
+    <div class="feature-item"><span class="fi-icon">👁</span><div class="fi-text"><strong>Zero-click protection</strong><span>Scans every email before you open it</span></div></div>
+    <div class="feature-item"><span class="fi-icon">🔍</span><div class="fi-text"><strong>15 detection rules</strong><span>Tracking pixels, spoofing, links, HTML</span></div></div>
+    <div class="feature-item"><span class="fi-icon">📖</span><div class="fi-text"><strong>Free explanations</strong><span>Clear reason for every flag — no AI needed</span></div></div>
+    <div class="feature-item"><span class="fi-icon">🤖</span><div class="fi-text"><strong>AI chat (Pro)</strong><span>Ask Claude anything about flagged emails</span></div></div>
+    <div class="feature-item"><span class="fi-icon">🔒</span><div class="fi-text"><strong>Privacy first</strong><span>Email content never leaves your device</span></div></div>
+  </div>
+  <div class="version-tag">Sentinel v1.0.0 · sentinel-app.com</div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

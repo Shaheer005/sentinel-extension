@@ -1,0 +1,110 @@
+/* SENTINEL v5 — Gmail badges and email panel */
+
+/* ── Inbox badges ─────────────────────────────────────────── */
+.sentinel-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Google Sans', Arial, sans-serif;
+  padding: 2px 7px;
+  border-radius: 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.3px;
+  cursor: default;
+  flex-shrink: 0;
+}
+.sentinel-phishing  { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
+.sentinel-suspicious{ background: #fef3c7; color: #d97706; border: 1px solid #fcd34d; }
+.sentinel-safe      { background: #dcfce7; color: #16a34a; border: 1px solid #86efac; }
+
+/* ── Email detail panel ───────────────────────────────────── */
+.sentinel-panel {
+  margin: 0 0 12px 0;
+  border-radius: 10px;
+  font-family: 'Google Sans', Arial, sans-serif;
+  font-size: 13px;
+  overflow: hidden;
+  border: 1.5px solid #e5e7eb;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.sentinel-panel-phishing   { border-color: #fca5a5; background: #fff5f5; }
+.sentinel-panel-suspicious { border-color: #fcd34d; background: #fffbeb; }
+.sentinel-panel-safe       { border-color: #86efac; background: #f0fdf4; }
+
+.sp-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.sentinel-panel-phishing   .sp-header { background: #fee2e2; }
+.sentinel-panel-suspicious .sp-header { background: #fef3c7; }
+.sentinel-panel-safe       .sp-header { background: #dcfce7; }
+
+.sp-icon { font-size: 20px; }
+.sp-verdict { flex: 1; line-height: 1.3; }
+.sp-verdict strong { display: block; font-size: 14px; color: #111827; }
+.sp-meta { font-size: 11px; color: #6b7280; }
+.sp-toggle { background: none; border: none; cursor: pointer; font-size: 14px; color: #6b7280; padding: 0; }
+
+.sp-body { padding: 12px 14px; }
+.sp-summary { margin: 0 0 10px; color: #374151; font-size: 13px; }
+
+/* Flags */
+.sp-flags { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+.sp-flag {
+  padding: 8px 11px;
+  border-radius: 7px;
+  border-left: 4px solid #d1d5db;
+  background: #f9fafb;
+}
+.sp-sev-critical { border-left-color: #dc2626; background: #fff5f5; }
+.sp-sev-high     { border-left-color: #ea580c; background: #fff7ed; }
+.sp-sev-medium   { border-left-color: #d97706; background: #fffbeb; }
+.sp-sev-low      { border-left-color: #2563eb; background: #eff6ff; }
+
+.sp-flag-title   { font-weight: 600; font-size: 12px; color: #111827; margin-bottom: 3px; }
+.sp-flag-explain { font-size: 12px; color: #6b7280; line-height: 1.5; }
+
+.sp-advice { margin: 10px 0 0; padding: 8px 11px; background: #f0f9ff; border-radius: 7px; color: #0369a1; font-size: 12px; border-left: 4px solid #38bdf8; }
+
+/* AI Chat */
+.sp-ai-section { margin-top: 12px; border-top: 1px solid #e5e7eb; padding-top: 10px; }
+.sp-ai-header  { font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 8px; }
+.sp-ai-messages { max-height: 160px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.sp-msg { padding: 7px 10px; border-radius: 8px; font-size: 12px; line-height: 1.5; max-width: 90%; }
+.sp-msg-user      { background: #dbeafe; color: #1e3a5f; align-self: flex-end; }
+.sp-msg-assistant { background: #f3f4f6; color: #111827; align-self: flex-start; }
+.sp-typing        { opacity: 0.6; font-style: italic; }
+
+.sp-ai-input { display: flex; gap: 6px; }
+.sp-ai-input input {
+  flex: 1;
+  padding: 7px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  font-size: 12px;
+  outline: none;
+  font-family: inherit;
+}
+.sp-ai-input input:focus { border-color: #6366f1; }
+.sp-ai-input button {
+  padding: 7px 14px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.sp-ai-input button:hover { background: #4f46e5; }
+
+.sp-ai-unlock { margin: 6px 0 0; font-size: 11px; }
+.sp-ai-unlock a { color: #6366f1; text-decoration: none; font-weight: 600; }
+.sp-ai-unlock a:hover { text-decoration: underline; }
