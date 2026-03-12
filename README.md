@@ -38,4 +38,4 @@ Available on the **Microsoft Edge Add-ons Store** — search "Sentinel Phishing 
 
 ## Built by
 Shaheer Ahmed — Karachi, Pakistan  
-[LinkedIn](https://linkedin.com/in/) · [Website](https://sentinel-app.com)
+[LinkedIn](www.linkedin.com/in/shaheer-ahmed-64055223b) · [Website](https://sentinel-web-two.vercel.app/)
