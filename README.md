@@ -3,7 +3,7 @@
 > Silently scans every email before you open it. Free forever.
 
 [![Version](https://img.shields.io/badge/version-1.0.0-6366f1?style=flat-square)](https://github.com/Shaheer005/sentinel-extension)
-[![License]([![License: GPL v3](https://img.shields.io/badge/license-GPLv3-4ade80?style=flat-square)](https://github.com/Shaheer005/sentinel-extension/blob/main/LICENSE)](LICENSE)
+[![License](https://img.shields.io/badge/license-GPLv3-4ade80?style=flat-square)]](LICENSE)
 [![Store](https://img.shields.io/badge/Edge%20Add--ons-In%20Review-fbbf24?style=flat-square)](https://microsoftedge.microsoft.com/addons)
 [![Website](https://img.shields.io/badge/website-sentinel--app.com-818cf8?style=flat-square)](https://sentinel-app.com)
 
