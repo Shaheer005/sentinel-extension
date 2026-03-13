@@ -188,7 +188,7 @@ node server.js
 
 Building in public. First real shipped product.
 
-[LinkedIn]([https://linkedin.com/in/shaheerahmed](https://www.linkedin.com/in/shaheer-ahmed-64055223b/)) · [Website](https://sentinel-app.com)
+[LinkedIn](https://www.linkedin.com/in/shaheer-ahmed-64055223b/)) · [Website](https://sentinel-app.com)
 
 ---
 
