@@ -17,6 +17,20 @@ Existing tools react *after* the damage. Sentinel acts *before*.
 
 ---
 
+
+<img width="1895" height="891" alt="Screenshot 2026-03-25 233041" src="https://github.com/user-attachments/assets/c4473643-9ec8-4c91-b104-26ddd6a3d490" />
+
+<img width="1900" height="864" alt="Screenshot 2026-03-25 233050" src="https://github.com/user-attachments/assets/f91b92b9-fc09-4802-9d0e-d4d6814786f3" />
+
+<img width="1896" height="909" alt="Screenshot 2026-03-25 233059" src="https://github.com/user-attachments/assets/51765191-4c87-471f-bcd6-3c3139687659" />
+
+<img width="1894" height="877" alt="Screenshot 2026-03-25 233119" src="https://github.com/user-attachments/assets/2d508e60-0dcb-4ce2-8c90-ae2ec2e1f303" />
+
+<img width="1904" height="858" alt="Screenshot 2026-03-25 233128" src="https://github.com/user-attachments/assets/3e1dd0bb-8679-4005-afdd-d48bb14116ff" />
+
+
+
+
 ## What Sentinel Does
 
 The moment an email arrives in your Gmail inbox, Sentinel scans it automatically in the background and shows a verdict badge — before you click anything.
